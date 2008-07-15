@@ -9,6 +9,10 @@
         <img class="list-image" src="<%= product.image_url %>"/>
       </td>
 
+	<td>
+		<%= number_to_currency(product.price) %>
+	</td>
+
       <td width="60%">
         <span class="list-title"><%= h(product.title) %></span><br />
         <%= h(truncate(product.description, 80)) %>
