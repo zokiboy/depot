@@ -27,9 +27,17 @@
       <a href="http://www..../contact">Contact</a><br />
 	<br />
 		<a href="#"><%= @time %></a>
+		<br /><br />
+		<% if @count > 5 -%>
+		This page has been seen <%= pluralize(@count, 'time') %>
+		<% end %>
     </div>
 
     <div id="main">
+		<% if flash[:notice] -%>
+			<div id="notice"><%= flash[:notice] %></div>
+		<% end -%>
+		
       <%= yield :layout %>
     </div>
   </div>
