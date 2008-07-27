@@ -9,7 +9,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080720134746) do
+ActiveRecord::Schema.define(:version => 20080727113810) do
+
+  create_table "line_items", :force => true do |t|
+    t.integer "product_id",  :limit => 11,                               :null => false
+    t.integer "order_id",    :limit => 11,                               :null => false
+    t.integer "quantity",    :limit => 11,                               :null => false
+    t.decimal "total_price",               :precision => 8, :scale => 2, :null => false
+  end
+
+  add_index "line_items", ["product_id"], :name => "fk_line_item_products"
+  add_index "line_items", ["order_id"], :name => "fk_line_item_orders"
+
+  create_table "orders", :force => true do |t|
+    t.string  "name"
+    t.text    "address"
+    t.string  "email"
+    t.integer "payment_type_id", :limit => 11, :null => false
+  end
+
+  add_index "orders", ["payment_type_id"], :name => "fk_order_payment_types"
+
+  create_table "payment_types", :force => true do |t|
+    t.string "label", :default => "", :null => false
+    t.string "value", :default => "", :null => false
+  end
 
   create_table "products", :force => true do |t|
     t.string   "title"
